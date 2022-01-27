@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.jasperreports</groupId>
 	<artifactId>jasperreports</artifactId>
-	<version>master-SNAPSHOT</version>
+	<version>6.19.0-nexus1</version>
 	<packaging>jar</packaging>
 	<name>JasperReports Library</name>
 	<description>Free Java Reporting Library</description>
@@ -150,14 +150,14 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>5.1.0</version>
+			<version>5.2.0</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>5.1.0</version>
+			<version>5.2.0</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
@@ -446,7 +446,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports-fonts</artifactId>
-			<version>master-SNAPSHOT</version>
+			<version>6.18.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -515,7 +515,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports-metadata</artifactId>
-			<version>master-SNAPSHOT</version>
+			<version>6.18.1</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
@@ -536,6 +536,14 @@
 	</dependencies>
 	<repositories>
 		<repository>
+			<id>NexusMaven</id>
+			<url>https://pkgs.dev.azure.com/bdodev/Nexus/_packaging/NexusMaven/maven/v1</url>
+		</repository>
+		<repository>
+			<id>bdo-nexus</id>
+			<url>http://10.241.62.17:8082/nexus/content/groups/public</url>
+		</repository>
+		<repository>
 			<id>jaspersoft-third-party</id>
 			<url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
 		</repository>
@@ -550,6 +558,13 @@
 			<url>https://jaspersoft.jfrog.io/jaspersoft/jr-ce-releases</url>
 		</repository>
 	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>NexusMaven</id>
+			<url>https://pkgs.dev.azure.com/bdodev/Nexus/_packaging/NexusMaven/maven/v1</url>
+		</repository>
+	</distributionManagement>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>tests</testSourceDirectory>
@@ -609,29 +624,11 @@
 		</testResources>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.4</version>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>create</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<doCheck>true</doCheck>
-					<doUpdate>false</doUpdate>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.9.0</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<release>8</release>
 					<showWarnings>true</showWarnings>
 					<fork>true</fork><!-- TODO lucianc is this ok? -->
 					<compilerArgs>
@@ -643,7 +640,7 @@
 						<path>
 							<groupId>net.sf.jasperreports</groupId>
 							<artifactId>jasperreports-annotation-processors</artifactId>
-							<version>master-SNAPSHOT</version>
+							<version>6.18.1</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
