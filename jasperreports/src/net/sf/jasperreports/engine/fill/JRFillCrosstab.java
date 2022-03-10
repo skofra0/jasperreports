@@ -129,7 +129,7 @@ import net.sf.jasperreports.engine.xml.JRXmlConstants;
 import net.sf.jasperreports.export.AccessibilityUtil;
 import net.sf.jasperreports.export.type.AccessibilityTagEnum;
 import net.sf.jasperreports.properties.PropertyConstants;
-import net.sf.jasperreports.web.util.JacksonUtil;
+import net.sf.jasperreports.util.JacksonUtil;
 
 /**
  * Fill-time implementation of a {@link net.sf.jasperreports.crosstabs.JRCrosstab crosstab}.
@@ -3224,15 +3224,6 @@ public class JRFillCrosstab extends JRFillElement implements JRCrosstab, JROrigi
 
 	@Override
 	public void setIgnoreWidth(Boolean ignoreWidth)
-	{
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * @deprecated Replaced by {@link #setIgnoreWidth(Boolean)}.
-	 */
-	@Override
-	public void setIgnoreWidth(boolean ignoreWidth)
 	{
 		throw new UnsupportedOperationException();
 	}

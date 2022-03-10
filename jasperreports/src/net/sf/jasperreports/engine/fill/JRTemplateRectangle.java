@@ -99,7 +99,7 @@ public class JRTemplateRectangle extends JRTemplateGraphicElement implements JRC
 	{
 		super.setGraphicElement(rectangle);
 
-		setRadius(rectangle.getRadius());
+		setRadius(rectangle.getOwnRadius());
 	}
 
 
@@ -115,7 +115,7 @@ public class JRTemplateRectangle extends JRTemplateGraphicElement implements JRC
 		
 		linePen = new JRBasePen(this);
 		
-		getLinePen().setLineWidth((Float)0f);
+		getLinePen().setLineWidth(0f);
 		setFill(FillEnum.SOLID);
 	}
 
@@ -130,15 +130,6 @@ public class JRTemplateRectangle extends JRTemplateGraphicElement implements JRC
 	public Integer getOwnRadius()
 	{
 		return radius;
-	}
-
-	/**
-	 * @deprecated Replaced by {@link #setRadius(Integer)}.
-	 */
-	@Override
-	public void setRadius(int radius)
-	{
-		this.radius = radius;
 	}
 
 	@Override

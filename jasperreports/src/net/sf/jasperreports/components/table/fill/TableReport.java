@@ -128,7 +128,7 @@ import net.sf.jasperreports.engine.util.StyleUtil;
 import net.sf.jasperreports.export.AccessibilityUtil;
 import net.sf.jasperreports.export.type.AccessibilityTagEnum;
 import net.sf.jasperreports.properties.PropertyConstants;
-import net.sf.jasperreports.web.util.JacksonUtil;
+import net.sf.jasperreports.util.JacksonUtil;
 
 /**
  * @author Lucian Chirita (lucianc@users.sourceforge.net)
@@ -338,22 +338,6 @@ public class TableReport implements JRReport
 			valueType = Boolean.class
 			)
 	public static final String PROPERTY_COLUMN_FILTERABLE = JRPropertiesUtil.PROPERTY_PREFIX + "components.table.column.filterable";
-
-	/**
-	 * Column property that enables/disables conditional formatting
-	 * 
-	 * <p>
-	 * It defaults to <code>true</code>
-	 * @deprecated To be removed.
-	 */
-	@Property(
-			category = PropertyConstants.CATEGORY_TABLE,
-			defaultValue = PropertyConstants.BOOLEAN_TRUE,
-			scopes = {PropertyScope.TABLE_COLUMN},
-			sinceVersion = PropertyConstants.VERSION_5_0_1,
-			valueType = Boolean.class
-			)
-	public static final String PROPERTY_COLUMN_CONDITIONALLY_FORMATTABLE = JRPropertiesUtil.PROPERTY_PREFIX + "components.table.column.conditionally.formattable";
 
 	/**
 	 * Property that provides a name for table.

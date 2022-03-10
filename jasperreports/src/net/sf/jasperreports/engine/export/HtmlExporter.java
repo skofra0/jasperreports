@@ -106,6 +106,7 @@ import net.sf.jasperreports.engine.type.RotationEnum;
 import net.sf.jasperreports.engine.type.RunDirectionEnum;
 import net.sf.jasperreports.engine.type.ScaleImageEnum;
 import net.sf.jasperreports.engine.type.VerticalImageAlignEnum;
+import net.sf.jasperreports.engine.util.ExifOrientationEnum;
 import net.sf.jasperreports.engine.util.HyperlinkData;
 import net.sf.jasperreports.engine.util.ImageUtil;
 import net.sf.jasperreports.engine.util.JRCloneUtils;
@@ -1284,6 +1285,24 @@ public class HtmlExporter extends AbstractHtmlExporter<HtmlReportConfiguration, 
 									normalHeight = dimension.getHeight();
 								}
 								
+								ExifOrientationEnum exifOrientation = ExifOrientationEnum.NORMAL;
+								
+								DataRenderable dataRenderable = renderer instanceof DataRenderable ? (DataRenderable)renderer : null;
+								if (dataRenderable != null)
+								{
+									exifOrientation = ImageUtil.getExifOrientation(dataRenderable.getData(getJasperReportsContext()));
+								}
+								
+								if (
+									ExifOrientationEnum.LEFT == exifOrientation
+									|| ExifOrientationEnum.RIGHT == exifOrientation
+									)
+								{
+									double t = normalWidth;
+									normalWidth = normalHeight;
+									normalHeight = t;
+								}
+
 								// these calculations assume that the image td does not stretch due to other cells.
 								// when that happens, the image will not be properly aligned.
 								positionLeft = (int) (ImageUtil.getXAlignFactor(horizontalAlign) * (availableImageWidth - normalWidth));
@@ -1315,6 +1334,24 @@ public class HtmlExporter extends AbstractHtmlExporter<HtmlReportConfiguration, 
 									normalHeight = dimension.getHeight();
 								}
 								
+								ExifOrientationEnum exifOrientation = ExifOrientationEnum.NORMAL;
+								
+								DataRenderable dataRenderable = renderer instanceof DataRenderable ? (DataRenderable)renderer : null;
+								if (dataRenderable != null)
+								{
+									exifOrientation = ImageUtil.getExifOrientation(dataRenderable.getData(getJasperReportsContext()));
+								}
+								
+								if (
+									ExifOrientationEnum.LEFT == exifOrientation
+									|| ExifOrientationEnum.RIGHT == exifOrientation
+									)
+								{
+									double t = normalWidth;
+									normalWidth = normalHeight;
+									normalHeight = t;
+								}
+
 								double ratio = normalWidth / normalHeight;
 				
 								if ( ratio > (double)availableImageWidth / (double)availableImageHeight )
@@ -3064,9 +3101,30 @@ public class HtmlExporter extends AbstractHtmlExporter<HtmlReportConfiguration, 
 			
 		writer.write(">");
 
-		writer.write(
-			JRStringUtil.htmlEncode(text)
-			);
+		StringTokenizer tkzer = new StringTokenizer(text, "\n\u0085", true);
+
+		// text is split into paragraphs here because it might have not been split during initial styled text processing
+		// and was processed as a whole because there was no need to do so due to lack of paragraph styling; 
+		// htmlEncode(String) no longer takes care of newline characters, so we do it here
+		while(tkzer.hasMoreTokens()) 
+		{
+			String token = tkzer.nextToken();
+			
+			if ("\n".equals(token))
+			{
+				writer.write("<br/>");
+			}
+			else if ("\u0085".equals(token))
+			{
+				writer.write("<br aria-hidden=\"true\"/>");
+			}
+			else
+			{
+				writer.write(
+					JRStringUtil.htmlEncode(token)
+					);
+			}
+		}
 
 		writer.write("</span>");
 
