@@ -1,6 +1,6 @@
 /*
  * JasperReports - Free Java Reporting Library.
- * Copyright (C) 2001 - 2019 TIBCO Software Inc. All rights reserved.
+ * Copyright (C) 2001 - 2022 TIBCO Software Inc. All rights reserved.
  * http://www.jaspersoft.com
  *
  * Unless you have purchased a commercial license agreement from Jaspersoft,
@@ -194,13 +194,13 @@ public class HtmlExporter extends AbstractHtmlExporter<HtmlReportConfiguration, 
 	protected int reportIndex;
 	protected int pageIndex;
 	
-	protected LinkedList<Color> backcolorStack = new LinkedList<Color>();
+	protected LinkedList<Color> backcolorStack = new LinkedList<>();
 	
 	protected ExporterFilter tableFilter;
 	
 	protected int pointerEventsNoneStack = 0;
 
-	private List<HyperlinkData> hyperlinksData = new ArrayList<HyperlinkData>();
+	private List<HyperlinkData> hyperlinksData = new ArrayList<>();
 	
 	private boolean defaultIndentFirstLine;
 	private boolean defaultJustifyLastLine;
@@ -236,8 +236,8 @@ public class HtmlExporter extends AbstractHtmlExporter<HtmlReportConfiguration, 
 		ensureJasperReportsContext();
 		ensureInput();
 
-		rendererToImagePathMap = new HashMap<String,String>();
-		imageMaps = new HashMap<Pair<String, Rectangle>,String>();
+		rendererToImagePathMap = new HashMap<>();
+		imageMaps = new HashMap<>();
 		renderersCache = new RenderersCache(getJasperReportsContext());
 
 		fontsToProcess = new HashMap<String, HtmlFontFamily>();
@@ -1032,7 +1032,7 @@ public class HtmlExporter extends AbstractHtmlExporter<HtmlReportConfiguration, 
 					
 					if (renderer instanceof DataRenderable)
 					{
-						imageMaps.put(new Pair<String, Rectangle>(renderer.getId(), renderingArea), imageMapName);
+						imageMaps.put(new Pair<>(renderer.getId(), renderingArea), imageMapName);
 					}
 				}
 			}
@@ -3180,19 +3180,6 @@ public class HtmlExporter extends AbstractHtmlExporter<HtmlReportConfiguration, 
 			
 		switch (lineSpacing)
 		{
-			case SINGLE:
-			default:
-			{
-				if (lineSpacingFactor == 0)
-				{
-					styleBuffer.append(" line-height: 1; *line-height: normal;");
-				}
-				else
-				{
-					styleBuffer.append(" line-height: " + lineSpacingFactor + ";");
-				}
-				break;
-			}
 			case ONE_AND_HALF:
 			{
 				if (lineSpacingFactor == 0)
@@ -3229,6 +3216,19 @@ public class HtmlExporter extends AbstractHtmlExporter<HtmlReportConfiguration, 
 			{
 				if (lineSpacingSize != null) {
 					styleBuffer.append(" line-height: " + lineSpacingSize + "px;");
+				}
+				break;
+			}
+			case SINGLE:
+			default:
+			{
+				if (lineSpacingFactor == 0)
+				{
+					styleBuffer.append(" line-height: 1; *line-height: normal;");
+				}
+				else
+				{
+					styleBuffer.append(" line-height: " + lineSpacingFactor + ";");
 				}
 				break;
 			}

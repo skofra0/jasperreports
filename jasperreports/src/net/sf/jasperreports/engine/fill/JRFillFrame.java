@@ -1,6 +1,6 @@
 /*
  * JasperReports - Free Java Reporting Library.
- * Copyright (C) 2001 - 2019 TIBCO Software Inc. All rights reserved.
+ * Copyright (C) 2001 - 2022 TIBCO Software Inc. All rights reserved.
  * http://www.jaspersoft.com
  *
  * Unless you have purchased a commercial license agreement from Jaspersoft,
@@ -101,9 +101,9 @@ public class JRFillFrame extends JRFillElement implements JRFrame
 		
 		frameContainer = new JRFillFrameElements(factory);
 		
-		bottomTemplateFrames = new HashMap<JRStyle,JRTemplateElement>();
-		topTemplateFrames = new HashMap<JRStyle,JRTemplateElement>();
-		topBottomTemplateFrames = new HashMap<JRStyle,JRTemplateElement>();
+		bottomTemplateFrames = new HashMap<>();
+		topTemplateFrames = new HashMap<>();
+		topBottomTemplateFrames = new HashMap<>();
 		
 		setShrinkable(true);
 	}
